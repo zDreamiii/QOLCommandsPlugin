@@ -1,0 +1,36 @@
+name: QOLCommands
+version: '1.0'
+main: at.zDreamiii.qOLCommands.QOLCommands
+api-version: '1.21'
+
+commands:
+  Feed:
+    description: Deine Hungerbalken werden komplett gefüllt
+    usage: /feed
+    permission: qolcommands.feed
+    permission-message: "§cDu hast keine Berechtigung um diesen Befehl zu nutzen!"
+  Heal:
+    description: Deine Herzen werden komplett gefüllt
+    usage: /heal
+    permission: qolcommands.heal
+    permission-message: "§cDu hast keine Berechtigung um diesen Befehl zu nutzen!"
+  Repair:
+    description: Deine Items werden komplett repariert
+    usage: /repair
+    permission: qolcommands.repair
+    permission-message: "§cDu hast keine Berechtigung um diesen Befehl zu nutzen!"
+  Gamemode:
+    description: Spielmodus wieder wie früher mit Zahlen (und auch mit Namen) änderbar
+    usage: /gamemode <0-3|name>
+    permission: qolcommands.gamemode
+    permission-message: "§cDu hast keine Berechtigung um diesen Befehl zu nutzen!"
+
+permissions:
+  qolcommands.*:
+    description: Erlaubt Zugriff auf alle QOLCommands-Befehle
+    default: op
+    children:
+      qolcommands.feed: true
+      qolcommands.heal: true
+      qolcommands.repair: true
+      qolcommands.gamemode: true

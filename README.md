@@ -8,7 +8,7 @@ Currently, there are 4 commands available:
 - `/feed` — Fills your hunger bar completely. Requires permission `qolcommands.feed`.  
 - `/repair` — Repairs the item you’re holding. Requires permission `qolcommands.repair`.  
 - `/gamemode <0-3|name>` — Changes your game mode using the classic Minecraft numbers (0 = Survival, 1 = Creative, 2 = Adventure, 3 = Spectator) or the usual game mode names. Requires permission `qolcommands.gamemode`.  
-  *This plugin brings back the original numeric way to switch game modes!*
+  *This command brings back the original numeric way to switch game modes!*
 
 ## Installation  
 1. Download the latest release from the Releases section.  

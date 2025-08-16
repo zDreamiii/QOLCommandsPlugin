@@ -1,5 +1,5 @@
 # QOLCommandsPlugin  
-This is a Quality of Life Plugin for Minecraft that adds useful commands to improve gameplay.
+This is a Quality of Life Plugin for Minecraft 1.21.5 that adds useful commands to improve gameplay.
 
 ## Overview  
 Currently, there are 4 commands available:

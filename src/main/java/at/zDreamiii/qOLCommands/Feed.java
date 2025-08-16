@@ -8,6 +8,12 @@ import org.bukkit.entity.Player;
 
 public class Feed implements CommandExecutor {
 
+    private final QOLCommands plugin;
+
+    public Feed(QOLCommands plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -23,9 +29,17 @@ public class Feed implements CommandExecutor {
            return true;
        }
 
+        if (plugin.getCooldownManager().isOnCooldown(player.getUniqueId(), "feed")) {
+            long remaining = plugin.getCooldownManager().getRemainingTime(player.getUniqueId(), "feed");
+            player.sendMessage("§cDu musst noch " + remaining + " Sekunden warten, bevor du diesen Befehl wieder nutzen kannst!");
+            return true;
+       }
+
         player.setFoodLevel(20);
         player.setSaturation(20f);
-        player.sendMessage(ChatColor.GREEN + "Deine Hungerbalken wurden vollständig gefüllt!");
+        player.sendMessage(ChatColor.GREEN + "§aDein Hunger wurde gestillt!");
+
+        plugin.getCooldownManager().setCooldown(player.getUniqueId(), "feed");
         return true;
     }
 }

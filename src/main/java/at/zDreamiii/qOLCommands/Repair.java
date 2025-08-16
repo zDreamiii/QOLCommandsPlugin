@@ -11,6 +11,12 @@ import org.bukkit.inventory.meta.Damageable;
 
 public class Repair implements CommandExecutor {
 
+    private final QOLCommands plugin;
+
+    public Repair(QOLCommands plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -33,12 +39,22 @@ public class Repair implements CommandExecutor {
             return true;
         }
 
+        if (plugin.getCooldownManager().isOnCooldown(player.getUniqueId(), "repair")) {
+            long remaining = plugin.getCooldownManager().getRemainingTime(player.getUniqueId(), "repair");
+            player.sendMessage("§cDu musst noch " + remaining + " Sekunden warten, bevor du diesen Befehl wieder nutzen kannst!");
+            return true;
+        }
+
         if (item.getItemMeta() instanceof Damageable damageable) {
             damageable.setDamage(0);
             item.setItemMeta(damageable);
-            player.sendMessage( ChatColor.GREEN +"Dein Item wurde erfolgreich repariert!");
+            player.sendMessage(ChatColor.GREEN + "Dein Item wurde erfolgreich repariert!");
+
+
+            plugin.getCooldownManager().setCooldown(player.getUniqueId(), "repair");
         } else {
             player.sendMessage(ChatColor.RED + "Dein Item kann nicht repariert werden!");
+            return true;
         }
         return true;
     }

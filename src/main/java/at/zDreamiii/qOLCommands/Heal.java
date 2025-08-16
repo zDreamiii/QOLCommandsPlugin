@@ -8,6 +8,12 @@ import org.bukkit.entity.Player;
 
 public class Heal implements CommandExecutor {
 
+    private final QOLCommands plugin;
+
+    public Heal(QOLCommands plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -22,8 +28,17 @@ public class Heal implements CommandExecutor {
             return true;
         }
 
+        if (plugin.getCooldownManager().isOnCooldown(player.getUniqueId(), "heal")) {
+            long remaining = plugin.getCooldownManager().getRemainingTime(player.getUniqueId(), "heal");
+            player.sendMessage("§cDu musst noch " + remaining + " Sekunden warten, bevor du diesen Befehl wieder nutzen kannst!");
+            return true;
+
+        }
+
         player.setHealth(20);
         player.sendMessage("§aDu wurdest vollständig geheilt!");
+
+        plugin.getCooldownManager().setCooldown(player.getUniqueId(), "heal");
         return true;
     }
 }

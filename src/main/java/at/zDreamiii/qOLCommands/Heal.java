@@ -18,25 +18,25 @@ public class Heal implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Nur Spieler können diesen Befehl verwenden!");
+            sender.sendMessage(ChatColor.RED + "Only players can you this command!");
             return true;
         }
         Player player = (Player) sender;
 
         if (!player.hasPermission("qolcommands.heal")) {
-            player.sendMessage("§cDu hast keine Berechtigung, diesen Befehl zu nutzen!");
+            player.sendMessage("§cYou don't have the necessary permissions to use this command!");
             return true;
         }
 
         if (plugin.getCooldownManager().isOnCooldown(player.getUniqueId(), "heal")) {
             long remaining = plugin.getCooldownManager().getRemainingTime(player.getUniqueId(), "heal");
-            player.sendMessage("§cDu musst noch " + remaining + " Sekunden warten, bevor du diesen Befehl wieder nutzen kannst!");
+            player.sendMessage("§cYou have to wait " + remaining + " more seconds before you can use this command again!");
             return true;
 
         }
 
         player.setHealth(20);
-        player.sendMessage("§aDu wurdest vollständig geheilt!");
+        player.sendMessage("§aYou have been fully healed!");
 
         plugin.getCooldownManager().setCooldown(player.getUniqueId(), "heal");
         return true;

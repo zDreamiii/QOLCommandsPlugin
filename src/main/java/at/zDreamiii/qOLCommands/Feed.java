@@ -18,26 +18,26 @@ public class Feed implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Nur Spieler können diesen Befehl verwenden!");
+            sender.sendMessage(ChatColor.RED + "Only players can you this command!");
             return true;
         }
 
         Player player = (Player) sender;
 
        if (!player.hasPermission("qolcommands.feed")) {
-           player.sendMessage("§cDu hast keine Berechtigung, diesen Befehl zu nutzen!");
+           player.sendMessage("§cYou don't have the necessary permissions to use this command!");
            return true;
        }
 
         if (plugin.getCooldownManager().isOnCooldown(player.getUniqueId(), "feed")) {
             long remaining = plugin.getCooldownManager().getRemainingTime(player.getUniqueId(), "feed");
-            player.sendMessage("§cDu musst noch " + remaining + " Sekunden warten, bevor du diesen Befehl wieder nutzen kannst!");
+            player.sendMessage("§cYou have to wait " + remaining + " more seconds before you can use this command again!");
             return true;
        }
 
         player.setFoodLevel(20);
         player.setSaturation(20f);
-        player.sendMessage(ChatColor.GREEN + "§aDein Hunger wurde gestillt!");
+        player.sendMessage(ChatColor.GREEN + "§aYour hunger bar has been refilled!");
 
         plugin.getCooldownManager().setCooldown(player.getUniqueId(), "feed");
         return true;

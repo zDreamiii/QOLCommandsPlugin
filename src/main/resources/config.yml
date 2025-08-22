@@ -1,4 +1,4 @@
 cooldowns:
-  feed: 600 #Zeit wird in Sekunden angegeben
+  feed: 300 #Time is specified in seconds
   heal: 300
   repair: 300

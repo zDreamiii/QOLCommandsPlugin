@@ -13,19 +13,19 @@ public class Gamemode implements CommandExecutor {
     public boolean onCommand(CommandSender sender,Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Nur Spieler können diesen Befehl verwenden!");
+            sender.sendMessage(ChatColor.RED + "Only players can use this command!");
             return true;
         }
 
         Player player = (Player) sender;
 
         if (!player.hasPermission("qolcommands.gamemode")) {
-            player.sendMessage("§cDu hast keine Berechtigung, diesen Befehl zu nutzen!");
+            player.sendMessage("§cYou don’t have permission to use this command!");
             return true;
         }
 
         if (args.length != 1) {
-            player.sendMessage(ChatColor.GREEN + "Verwendung: /gamemode 0|1|2|3 oder Survival|Creative|Adventure|Spectator");
+            player.sendMessage(ChatColor.GREEN + "Usage: /gamemode 0|1|2|3 or survival|creative|adventure|spectator");
             return true;
         }
 
@@ -38,13 +38,13 @@ public class Gamemode implements CommandExecutor {
             case "2", "adventure" -> mode = GameMode.ADVENTURE;
             case "3", "spectator" -> mode = GameMode.SPECTATOR;
             default -> {
-                player.sendMessage(ChatColor.RED + "Ungültiger Spielmodus: " + args[0]);
+                player.sendMessage(ChatColor.RED + "Invalid gamemode: " + args[0]);
                 return true;
             }
         }
 
         player.setGameMode(mode);
-        player.sendMessage("Dein Spielmodus wurde zu " + mode.name().toLowerCase() + " geändert.");
+        player.sendMessage("Your gamemode has been set to " + mode.name().toLowerCase() + ".");
         return true;
     }
 }
